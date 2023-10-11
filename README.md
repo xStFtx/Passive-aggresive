@@ -1,10 +1,10 @@
-# Game IP Scanner
+# Process IP Scanner
 
-A tool designed to capture IP traffic for a specific game process and conduct scans using `nmap`.
+A tool designed to capture IP traffic for a specific process and conduct scans using `nmap`.
 
 ## Table of Contents
 
-- [Game IP Scanner](#game-ip-scanner)
+- [Process IP Scanner](#process-ip-scanner)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
@@ -17,13 +17,13 @@ A tool designed to capture IP traffic for a specific game process and conduct sc
 1. Ensure you have Python and PyQt5 installed.
 2. Install the required packages:
 
-   ```
+   ```bash
    pip install psutil pyshark
    ```
 
 3. Clone this repository:
 
-   ```
+   ```bash
    git clone https://github.com/xStFtx/Passive-aggresive.git
    cd Passive-aggresive
    ```
@@ -32,18 +32,18 @@ A tool designed to capture IP traffic for a specific game process and conduct sc
 
 Run the tool using:
 
-```
+```bash
 python main.py
 ```
 
-1. Select the game process from the dropdown.
+1. Select the process from the dropdown.
 2. Select the network interface.
 3. Click "Scan IPs" to begin the scan.
 
 ## Features
 
-- Real-time detection of game processes running on your system.
-- Captures IP traffic for the selected game process.
+- Real-time detection of processes running on your system.
+- Captures IP traffic for the selected process.
 - Uses `nmap` to scan detected IPs.
 - Intuitive GUI powered by PyQt5.
 
