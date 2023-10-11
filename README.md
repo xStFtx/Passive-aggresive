@@ -17,24 +17,24 @@ A tool designed to capture IP traffic for a specific game process and conduct sc
 1. Ensure you have Python and PyQt5 installed.
 2. Install the required packages:
 
-   \```
+   ```
    pip install psutil pyshark
-   \```
+   ```
 
 3. Clone this repository:
 
-   \```
-   git clone <your-repo-link>
-   cd path-to-your-repo
-   \```
+   ```
+   git clone https://github.com/xStFtx/Passive-aggresive.git
+   cd Passive-aggresive
+   ```
 
 ## Usage
 
 Run the tool using:
 
-\```
+```
 python main.py
-\```
+```
 
 1. Select the game process from the dropdown.
 2. Select the network interface.
