@@ -42,9 +42,11 @@ class IPScanner(QThread):
 
     def detect_process(self):
         for proc in psutil.process_iter(attrs=["pid", "name"]):
-            if proc.info['name'].lower() == self.process.lower():
+            name = proc.info.get('name')
+            if name and isinstance(name, str) and name.lower() == self.process.lower():
                 return proc.info['pid']
         return None
+
 
     def capture_traffic(self, pid):
         try:
