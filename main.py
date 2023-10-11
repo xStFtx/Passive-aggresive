@@ -4,8 +4,7 @@ import pyshark
 import subprocess
 import logging
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit, QLabel, QComboBox,
-                             QProgressBar, QInputDialog, QListWidget, QCheckBox, QLineEdit, QHBoxLayout, QErrorMessage)
-
+                             QProgressBar, QInputDialog, QCheckBox, QLineEdit, QErrorMessage)
 from PyQt5.QtCore import QThread, pyqtSignal
 import asyncio
 import ipaddress
@@ -15,7 +14,6 @@ logging.basicConfig(level=logging.DEBUG)
 DEFAULT_SCAN_DURATION = 10
 MIN_SCAN_DURATION = 5
 MAX_SCAN_DURATION = 120
-
 
 class IPScanner(QThread):
     signal = pyqtSignal('PyQt_PyObject', 'QString')
@@ -47,7 +45,6 @@ class IPScanner(QThread):
                 return proc.info['pid']
         return None
 
-
     def capture_traffic(self, pid):
         try:
             capture = pyshark.LiveCapture(interface=self.interface, display_filter=f"ip.addr eq {pid}")
@@ -67,7 +64,6 @@ class IPScanner(QThread):
             result = NmapScanner.scan_ip(ip)
             self.signal.emit(set([ip]), result)
 
-
 class NmapScanner:
     @staticmethod
     def scan_ip(ip, scan_type='-sV', skip_host_discovery=False):
@@ -82,13 +78,10 @@ class NmapScanner:
             logging.error(e.output)
             return f"Error scanning {ip}: {e.output}"
 
-
-
 def get_primary_interface():
     net_stats = psutil.net_io_counters(pernic=True)
     primary_interface = max(net_stats, key=lambda x: (net_stats[x].bytes_sent + net_stats[x].bytes_recv))
     return primary_interface
-
 
 class App(QWidget):
     def __init__(self):
@@ -126,7 +119,6 @@ class App(QWidget):
         self.filterLocalIpsCheckbox = QCheckBox("Filter Local IPs")
         self.filterLocalIpsCheckbox.setChecked(True)
         layout.addWidget(self.filterLocalIpsCheckbox)
-
 
         self.scanTypeComboBox = QComboBox()
         self.scanTypeComboBox.addItems(["-sV (Version detection)", "-sP (Ping scan)"])
@@ -185,7 +177,7 @@ class App(QWidget):
             return []
 
     def on_scan(self):
-        process = self.processComboBox.currentData()  
+        process = self.processComboBox.currentText()  # Get the selected process name as a string
         interface = self.interfaceComboBox.currentText()
         filter_local_ips = self.filterLocalIpsCheckbox.isChecked()
         skip_host_discovery = self.nmapPnCheckbox.isChecked()
@@ -202,7 +194,6 @@ class App(QWidget):
         self.logEdit.clear()
         self.scanner.start()
 
-
     def update_ips(self, ips, message):
         for ip in ips:
             self.logEdit.append(f"Detected IP: {ip}")
@@ -213,7 +204,6 @@ class App(QWidget):
 
     def update_progress(self, message):
         self.logEdit.append(message)
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
